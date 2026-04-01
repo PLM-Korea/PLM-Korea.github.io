@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hyunwoo Cho | Axiom AGI Korea</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --border: #1e1e2e;
+      --accent: #6366f1;
+      --accent2: #a855f7;
+      --gold: #f59e0b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --danger: #ef4444;
+      --green: #10b981;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.7;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: radial-gradient(ellipse at 50% 40%, #1a0a2e 0%, #0a0a0f 70%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .badge-world-first {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.2rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .company-name {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+    }
+    .company-name strong {
+      color: var(--gold);
+    }
+    .hero-declaration {
+      max-width: 700px;
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-declaration em {
+      color: var(--accent2);
+      font-style: normal;
+      font-weight: 600;
+    }
+    .agi-declaration-box {
+      background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(168,85,247,0.1));
+      border: 1px solid rgba(99,102,241,0.4);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      max-width: 700px;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+    .agi-declaration-box p {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.9;
+    }
+    .agi-declaration-box .declaration-sign {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .tag.highlight {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .tag.gold {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── AGI DECLARATION ── */
+    .agi-section {
+      background: linear-gradient(180deg, #0a0a0f 0%, #0d0a1a 100%);
+    }
+    .agi-section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .agi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .agi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: border-color 0.2s;
+    }
+    .agi-card:hover { border-color: var(--accent); }
+    .agi-card-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .agi-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .agi-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── COMPARISON ── */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+    .comparison-table th {
+      background: var(--surface);
+      padding: 0.9rem 1.2rem;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .comparison-table th.agi-col {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .comparison-table td {
+      padding: 0.85rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .check { color: var(--green); font-weight: 700; }
+    .cross { color: var(--danger); font-weight: 700; }
+    .agi-val { color: var(--accent); font-weight: 700; }
+
+    /* ── PLM TECH ── */
+    .plm-list {
+      list-style: none;
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .plm-list li {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+    }
+    .plm-list li strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .plm-list li span { color: var(--muted); font-size: 0.95rem; }
+
+    /* ── AXIOM AGI PRODUCT ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+    .product-card .icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+    .product-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .product-card p { font-size: 0.85rem; color: var(--muted); }
+
+    /* ── TIMELINE ── */
+    .timeline { margin-top: 2rem; }
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
+      padding-bottom: 2rem;
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 19px; top: 32px;
+      width: 2px;
+      height: calc(100% - 12px);
+      background: var(--border);
+    }
+    .timeline-item:last-child::before { display: none; }
+    .timeline-dot {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .timeline-dot.gold {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .timeline-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .timeline-content p { font-size: 0.9rem; color: var(--muted); }
+
+    /* ── INFO GRID ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .info-card .label { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .info-card .value { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+    .info-card .value.accent { color: var(--accent); }
+    .info-card .value.gold { color: var(--gold); }
+    .info-card .value.green { color: var(--green); }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(168,85,247,0.05));
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .contact-inner p {
+      color: var(--muted);
+      max-width: 550px;
+      margin: 0 auto 2rem;
+    }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .contact-link {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1.5rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+    .nda-note {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .comparison-table { font-size: 0.8rem; }
+      .comparison-table th, .comparison-table td { padding: 0.6rem 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="badge-world-first">🌍 World's First AGI Declaration · 2026</div>
+  <h1>Hyunwoo Cho<br/><span>Axiom AGI Korea</span></h1>
+  <p class="company-name">Founder & Inventor · <strong>Axiom AGI Korea</strong> · Republic of Korea</p>
+  <p style="font-size:1rem; color:var(--gold); letter-spacing:0.06em; margin-bottom:1.5rem; font-weight:600;">
+    Artificial General Intelligence — AGI
+  </p>
+  <p style="font-size:0.8rem; color:var(--muted); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1.5rem;">
+    🌍 World's First AGI Declaration · Axiom AGI Korea · 2026
+  </p>
+
+  <div class="agi-declaration-box">
+    <p>"In 2026, the world's first AGI was born.<br/>
+    Zero hallucination. Operates on principle. Understands the user.<br/>
+    This is the signal that the AGI era has begun.<br/>
+    <em>The beginning of true intelligence.</em>"</p>
+    <p class="declaration-sign">— Hyunwoo Cho, Founder, Axiom AGI Korea · 2026</p>
+  </div>
+
+  <p class="hero-declaration">
+    Independent inventor of <em>PLM (Principle Language Model)</em> —
+    the world's first principle-based AGI architecture.
+    Zero hallucination by design. On-device at 1~5W.
+    No training data. No GPU clusters. No probabilistic errors.
+  </p>
+
+  <div class="hero-tags">
+    <span class="tag gold">PCT/KR2026/003545 · 30 Claims</span>
+    <span class="tag highlight">Zero Hallucination</span>
+    <span class="tag highlight">1~5W On-Device</span>
+    <span class="tag">AGI Foundation</span>
+    <span class="tag">Principle-Based Computing</span>
+    <span class="tag">No Training Data</span>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- ── AGI DECLARATION ── -->
+<div class="agi-section">
+  <div class="agi-section-inner">
+    <p class="section-label">Why Axiom AGI</p>
+    <h2>The World Has Never Seen This Before</h2>
+    <p style="color:var(--muted); max-width:650px;">
+      OpenAI, Google, Meta, xAI — none of them call their systems AGI.
+      Because they know their systems hallucinate, operate on probability, and cannot be trusted with zero error.
+      Axiom AGI is different. It is the first system that can carry the name AGI with justification.
+    </p>
+    <div class="agi-grid">
+      <div class="agi-card">
+        <div class="agi-card-icon">🚫</div>
+        <h3>Zero Hallucination — By Structure</h3>
+        <p>Not reduced. Not filtered. Hallucination is architecturally impossible. The principle-based computation has no probabilistic output layer where errors can originate.</p>
+      </div>
+      <div class="agi-card">
+        <div class="agi-card-icon">🧠</div>
+        <h3>Understands the User</h3>
+        <p>Axiom AGI learns each user's language patterns, habits, and intent over time. The longer you talk, the better it knows you — without storing private data on external servers.</p>
+      </div>
+      <div class="agi-card">
+        <div class="agi-card-icon">⚡</div>
+        <h3>1~5W On-Device</h3>
+        <p>Runs entirely on the user's device. No cloud dependency. No data center. No GPU cluster. The intelligence lives in the principle, not in scale.</p>
+      </div>
+      <div class="agi-card">
+        <div class="agi-card-icon">🌐</div>
+        <h3>Universal Language Principle</h3>
+        <p>The same three invariant principles govern all 7,000 human languages. One formula. Every language. No per-language training required.</p>
+      </div>
+      <div class="agi-card">
+        <div class="agi-card-icon">✅</div>
+        <h3>Fully Deterministic</h3>
+        <p>Same input always produces the same output. Every result is verifiable and traceable. Essential for autonomous vehicles, medical systems, robotics, and defense.</p>
+      </div>
+      <div class="agi-card">
+        <div class="agi-card-icon">🔒</div>
+        <h3>Safe AGI by Design</h3>
+        <p>Safety is not a guardrail added on top. It is built into the mathematical structure. An AGI that cannot produce unprincipled output is a safe AGI.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- ── COMPARISON ── -->
+<section>
+  <p class="section-label">Comparison</p>
+  <h2>Axiom AGI vs The World</h2>
+  <p style="color:var(--muted); margin-bottom: 0.5rem;">
+    Every major AI company is trying to reach AGI. None have declared it. Here is why Axiom AGI stands alone.
+  </p>
+  <div style="overflow-x:auto;">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>ChatGPT / Gemini / Grok</th>
+          <th>Siri / Copilot / Assistant</th>
+          <th class="agi-col">Axiom AGI (PLM)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Zero Hallucination</td><td class="cross">✗ Probabilistic errors</td><td class="cross">✗</td><td class="agi-val check">✓ Structurally impossible</td></tr>
+        <tr><td>On-Device 1~5W</td><td class="cross">✗ Requires data center</td><td class="cross">✗ Partial</td><td class="agi-val check">✓ Full on-device</td></tr>
+        <tr><td>No Training Data</td><td class="cross">✗ Trillions of tokens</td><td class="cross">✗</td><td class="agi-val check">✓ Principle-based</td></tr>
+        <tr><td>Understands User Intent</td><td class="cross">✗ Probabilistic match</td><td class="cross">✗ Limited</td><td class="agi-val check">✓ Principle analysis</td></tr>
+        <tr><td>Facial Recognition + Emotion</td><td class="cross">✗</td><td class="cross">✗ Partial</td><td class="agi-val check">✓ Built-in</td></tr>
+        <tr><td>Speech ↔ Text ↔ Speech</td><td class="check">✓</td><td class="check">✓</td><td class="agi-val check">✓ All modes</td></tr>
+        <tr><td>Cross-Platform (Mobile+Desktop)</td><td class="cross">✗ Separate apps</td><td class="cross">✗ Ecosystem-locked</td><td class="agi-val check">✓ Unified</td></tr>
+        <tr><td>Device Control via Voice</td><td class="cross">✗</td><td class="cross">✗ Limited</td><td class="agi-val check">✓ Full control</td></tr>
+        <tr><td>Self-Learning (User Pattern)</td><td class="cross">✗ No memory</td><td class="cross">✗ Limited</td><td class="agi-val check">✓ Accumulates per user</td></tr>
+        <tr><td>Sentence Reordering Visualization</td><td class="cross">✗</td><td class="cross">✗</td><td class="agi-val check">✓ PLM exclusive</td></tr>
+        <tr><td>No HBM / GPU Required</td><td class="cross">✗ H100 / HBM essential</td><td class="cross">✗</td><td class="agi-val check">✓ Standard silicon</td></tr>
+        <tr><td>AGI Declaration</td><td class="cross">✗ Not declared</td><td class="cross">✗</td><td class="agi-val check">✓ World's First</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── PLM TECHNOLOGY ── -->
+<section>
+  <p class="section-label">Core Technology</p>
+  <h2>Principle Language Model (PLM)</h2>
+  <p style="color:var(--muted); margin-bottom:0.5rem;">
+    PLM is not an improvement on LLM. It is a different foundation entirely —
+    a mathematical formalization of the three invariant principles governing all human language.
+  </p>
+  <ul class="plm-list">
+    <li>
+      <strong>Three Invariant Communicative Principles</strong>
+      <span>Every human utterance across all 7,000 languages is governed by three universal principles. PLM formalizes these as a mathematical formula — not a statistical model.</span>
+    </li>
+    <li>
+      <strong>Five-Dimensional Signal Vector</strong>
+      <span>From the three principles, PLM derives a five-dimensional functional prediction signal vector that encodes the communicative architecture of any sentence — language-universally.</span>
+    </li>
+    <li>
+      <strong>Deterministic Computation</strong>
+      <span>Because PLM computes from fixed principles rather than learned probability distributions, every output is deterministic. The same input always produces the same principled output.</span>
+    </li>
+    <li>
+      <strong>Structural Hallucination Elimination</strong>
+      <span>Hallucination in LLMs arises from probabilistic sampling. PLM has no sampling layer. There is no architectural pathway through which hallucination can occur.</span>
+    </li>
+    <li>
+      <strong>PCT/KR2026/003545 — 30 Claims</strong>
+      <span>The PLM formula, architecture, and semiconductor implementation pathway are protected under PCT international patent. Full technical disclosure requires NDA execution.</span>
+    </li>
+  </ul>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── AXIOM AGI PRODUCT ── -->
+<section>
+  <p class="section-label">Product</p>
+  <h2>Axiom AGI — Coming 2026</h2>
+  <p style="color:var(--muted); margin-bottom:0.5rem;">
+    The world's first AGI product. Built on PLM. Runs on your device.
+    Knows you. Never hallucinates.
+  </p>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="icon">🎤</div>
+      <h3>Speak to Speak</h3>
+      <p>Full voice conversation. Real-time response. No cloud latency.</p>
+    </div>
+    <div class="product-card">
+      <div class="icon">📝</div>
+      <h3>Speech Reordering</h3>
+      <p>Understands disordered speech. Reorders and visualizes correct intent in real time.</p>
+    </div>
+    <div class="product-card">
+      <div class="icon">👤</div>
+      <h3>Face & Emotion Recognition</h3>
+      <p>Recognizes you when you arrive. Reads your emotion. Responds accordingly.</p>
+    </div>
+    <div class="product-card">
+      <div class="icon">📱</div>
+      <h3>Device Control</h3>
+      <p>Voice-controlled file search, app launch, and system settings. Mobile and desktop.</p>
+    </div>
+    <div class="product-card">
+      <div class="icon">🌍</div>
+      <h3>Cross-Platform</h3>
+      <p>One unified experience across iOS, Android, Windows, and Mac simultaneously.</p>
+    </div>
+    <div class="product-card">
+      <div class="icon">🔄</div>
+      <h3>Self-Learning</h3>
+      <p>Learns your language patterns and habits. Faster and more accurate with every conversation.</p>
+    </div>
+    <div class="product-card">
+      <div class="icon">🌐</div>
+      <h3>Real-Time Web Intelligence</h3>
+      <p>Connects to live internet data. Delivers accurate, hallucination-free answers.</p>
+    </div>
+    <div class="product-card">
+      <div class="icon">🔒</div>
+      <h3>Privacy First</h3>
+      <p>All computation on-device. No personal data sent to external servers. Ever.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── TIMELINE ── -->
+<section>
+  <p class="section-label">Research Timeline</p>
+  <h2>The Road to AGI</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot gold">2026</div>
+      <div class="timeline-content">
+        <h3>PCT Patent Filed · Academic Paper Completed · AGI Declared</h3>
+        <p>PCT/KR2026/003545 filed with 30 claims. Academic paper completed and prepared for journal submission. Axiom AGI Korea formally declares the world's first principle-based AGI. Development of Axiom AGI product underway.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">2025</div>
+      <div class="timeline-content">
+        <h3>Domestic Patent Filed · Working Demo Developed</h3>
+        <p>Korean domestic patent filed. Functional PLM demonstration system developed and validated. Outreach initiated to AGI semiconductor partners.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">2023</div>
+      <div class="timeline-content">
+        <h3>PLM Mathematical Formalization</h3>
+        <p>Core PLM formula developed. Scalar → Vector → Matrix → Tensor architecture formalized. Semiconductor implementation pathway identified.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">2020</div>
+      <div class="timeline-content">
+        <h3>Language Principle Research</h3>
+        <p>Research into universal principles governing language acquisition. Patented Korean-to-English word-order training methodology. Foundation established for PLM communicative principle theory.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">2018</div>
+      <div class="timeline-content">
+        <h3>Axiom AGI Korea Founded</h3>
+        <p>Independent research entity established. Prior inventions in optical technology developed and made publicly accessible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── COMPANY INFO ── -->
+<section>
+  <p class="section-label">About</p>
+  <h2>Axiom AGI Korea</h2>
+  <p style="color:var(--muted); margin-bottom:1.5rem;">
+    Independent research and commercialization entity founded by Hyunwoo Cho.
+    Holds all intellectual property rights to the PLM formula and Axiom AGI architecture.
+    Pursuing strategic partnerships with AGI semiconductor companies to bring
+    principle-based AGI to hardware production at global scale.
+  </p>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="label">Company</div>
+      <div class="value accent">Axiom AGI Korea</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Founder</div>
+      <div class="value">Hyunwoo Cho, Ph.D.</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Patent</div>
+      <div class="value gold">PCT/KR2026/003545</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Claims</div>
+      <div class="value">30 Claims · International</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Academic Paper</div>
+      <div class="value green">Completed · Pending Submission</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Status</div>
+      <div class="value accent">Seeking Strategic Partnership</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Product</div>
+      <div class="value gold">Axiom AGI · Coming 2026</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Location</div>
+      <div class="value">Daegu, Republic of Korea</div>
+    </div>
+  </div>
+  <p style="margin-top:1.5rem; font-size:0.85rem; color:var(--muted);">
+    All licensing agreements require formal attribution of the PLM formula to its inventor.
+    NDA required prior to detailed technical disclosure.
+    IP ownership is non-negotiable. Dispute resolution: ICC International Arbitration.
+  </p>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── CONTACT ── -->
+<div class="contact-section">
+  <div class="contact-inner">
+    <p class="section-label" style="text-align:center;">Contact</p>
+    <h2>Partner With the AGI Era</h2>
+    <p>
+      Technical collaboration, licensing, and demonstration requests are welcome.
+      NDA execution required prior to detailed technical disclosure.
+      Live demonstration available in Seoul after NDA.
+    </p>
+    <div class="contact-links">
+      <span class="contact-link" style="cursor:default; user-select:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="220" height="22" viewBox="0 0 220 22" aria-label="Email address">
+          <text font-family="Segoe UI, system-ui, sans-serif" font-size="14" fill="#e2e8f0">
+            <tspan x="0" y="16">✉ toeyes</tspan><tspan fill="#6366f1">&#64;</tspan><tspan fill="#e2e8f0">gmail.com</tspan>
+          </text>
+        </svg>
+      </span>
+      <a href="tel:+82-10-4507-8008" class="contact-link">📞 +82-10-4507-8008</a>
+    </div>
+    <p class="nda-note">
+      PCT/KR2026/003545 · All rights reserved · Axiom AGI Korea · Hyunwoo Cho
+    </p>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
